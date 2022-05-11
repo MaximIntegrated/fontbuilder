@@ -29,6 +29,7 @@
  */
 
 #include "outputconfig.h"
+#include <iostream>
 
 OutputConfig::OutputConfig(QObject *parent) :
     QObject(parent)
@@ -52,3 +53,14 @@ void OutputConfig::setDescriptionName(const QString& name) {
         descriptionNameChanged(name);
     }
 }
+
+void OutputConfig::setBgColor(QColor c) {
+    m_bg_color = c;
+    outputColorOptionsChanged();
+}
+
+void OutputConfig::setFgColor(QColor c) {
+    m_fg_color = c;
+    outputColorOptionsChanged();
+}
+

@@ -58,14 +58,14 @@ FontBuilder::FontBuilder(QWidget *parent) :
 {
     ui->setupUi(this);
 
-
+    m_output_config = new OutputConfig(this);
 
     m_font_config = new FontConfig(this);
     bool font_config_block = m_font_config->blockSignals(true);
     connect(m_font_config,SIGNAL(nameChanged()),this,SLOT(onFontNameChanged()));
     connect(m_font_config,SIGNAL(sizeChanged()),this,SLOT(onFontNameChanged()));
 
-    m_font_renderer = new FontRenderer(this,m_font_config);
+    m_font_renderer = new FontRenderer(this,m_font_config,m_output_config);
 
     connect(m_font_renderer,SIGNAL(imagesChanged()),this,SLOT(onRenderedChanged()));
 
@@ -80,8 +80,6 @@ FontBuilder::FontBuilder(QWidget *parent) :
     bool b = ui->comboBoxLayouter->blockSignals(true);
     ui->comboBoxLayouter->clear();
     ui->comboBoxLayouter->addItems(m_layouter_factory->names());
-
-    m_output_config = new OutputConfig(this);
 
     QSettings settings;
     restoreGeometry(settings.value("geometry").toByteArray());
@@ -106,7 +104,7 @@ FontBuilder::FontBuilder(QWidget *parent) :
     m_exporter_factory = new ExporterFactory(this);
     ui->frameOutput->setExporters(m_exporter_factory->names());
 
-    m_image_writer_factory = new ImageWriterFactory(this);
+    m_image_writer_factory = new ImageWriterFactory(this, m_output_config);
     ui->frameOutput->setImageWriters(m_image_writer_factory->names());
 
     ui->comboBoxLayouter->blockSignals(b);
@@ -231,7 +229,7 @@ void FontBuilder::setLayoutImage(const QImage& image) {
 
 void FontBuilder::onLayoutChanged() {
     QImage image (m_layout_data->width(),m_layout_data->height(),QImage::Format_ARGB32);
-    image.fill(0);
+    image.fill(m_output_config->bgColor().rgba());
     {
         QPainter painter(&image);
         foreach (const LayoutChar& c,m_layout_data->placed()) {

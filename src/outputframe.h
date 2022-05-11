@@ -69,6 +69,10 @@ private slots:
     void on_pushButtonSelectPath_clicked();
 
     void on_checkBoxGenerateX2_stateChanged(int arg1);
+
+    void setBackgroundColor(QColor c);
+    void setForegroundColor(QColor c);
+
 };
 
 #endif // OUTPUTFRAME_H

@@ -32,12 +32,13 @@
 #define TARGAWRITER_H
 
 #include "../abstractimagewriter.h"
+#include "../outputconfig.h"
 
 class TargaImageWriter : public AbstractImageWriter
 {
 Q_OBJECT
 public:
-    TargaImageWriter(QString ext,QObject *parent = 0);
+    TargaImageWriter(QString ext,QObject *parent, const OutputConfig* config);
 
     virtual bool Export(QFile& file);
     virtual QImage* reload(QFile& file);

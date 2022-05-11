@@ -37,7 +37,7 @@
 #include <QImage>
 #include <QImageWriter>
 
-
+#include <iostream>
 OutputFrame::OutputFrame(QWidget *parent) :
     QFrame(parent),
     ui(new Ui::OutputFrame)
@@ -90,6 +90,12 @@ void OutputFrame::setConfig(OutputConfig* config) {
                 ui->comboBoxDescriptionType->setCurrentIndex(i);
         config->setDescriptionFormat(ui->comboBoxDescriptionType->currentText());
         ui->checkBoxGenerateX2->setChecked(config->generateX2());
+
+        ui->widgetBackgroundColor->setColor(config->bgColor());
+        ui->widgetForegroundColor->setColor(config->fgColor());
+        connect(ui->widgetBackgroundColor,SIGNAL(colorChanged(QColor)),this,SLOT(setBackgroundColor(QColor)));
+        connect(ui->widgetForegroundColor,SIGNAL(colorChanged(QColor)),this,SLOT(setForegroundColor(QColor)));
+
     }
 }
 
@@ -166,3 +172,15 @@ void OutputFrame::on_checkBoxGenerateX2_stateChanged(int arg1)
 {
     if (m_config) m_config->setGenerateX2(arg1==Qt::Checked);
 }
+
+void OutputFrame::setBackgroundColor(QColor c) {
+    std::cout << "background : " << c.rgba() << std::endl;
+    if (m_config) m_config->setBgColor(c);
+}
+
+void OutputFrame::setForegroundColor(QColor c) {
+    std::cout << "foreground : " << c.rgba() << std::endl;
+    if (m_config) m_config->setFgColor(c);
+}
+
+

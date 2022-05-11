@@ -40,14 +40,14 @@
 
 #include "rendererdata.h"
 #include "layoutchar.h"
-
+#include "outputconfig.h"
 class FontConfig;
 
 class FontRenderer : public QObject
 {
 Q_OBJECT
 public:
-    explicit FontRenderer(QObject *parent , const FontConfig* config);
+    explicit FontRenderer(QObject *parent , const FontConfig* config, const OutputConfig* outputConfig);
     ~FontRenderer();
 
     const QVector<LayoutChar>& rendered() const { return m_chars;}
@@ -60,6 +60,7 @@ public:
     float scale() const { return m_scale; }
 private:
     const FontConfig* m_config;
+    const OutputConfig* m_outputConfig;
     FT_Library m_ft_library;
     FT_Face m_ft_face;
     QByteArray  m_data;

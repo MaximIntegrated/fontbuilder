@@ -39,8 +39,8 @@
 
 #include <QDebug>
 
-TargaImageWriter::TargaImageWriter(QString ext,QObject *parent) :
-    AbstractImageWriter(parent)
+TargaImageWriter::TargaImageWriter(QString ext,QObject *parent, const OutputConfig* config) :
+    AbstractImageWriter(parent, config)
 {
     setExtension(ext);
     setReloadSupport(true);
@@ -95,7 +95,7 @@ struct TGA_HEADER
 
 
 bool TargaImageWriter::Export(QFile& file) {
-    QImage pixmap = buildImage();
+    QImage pixmap = buildImage(m_config->bgColor().rgba());
 
     TGA_HEADER header;
     header.idlength = 0;

@@ -33,29 +33,29 @@
 #include "image/targawriter.h"
 //#include "image/maximimagewriter.h"
 
-static AbstractImageWriter* BMP_img_writer(QObject* parent) {
-    return new BuiltinImageWriter("bmp","bmp",parent);
+static AbstractImageWriter* BMP_img_writer(QObject* parent, const OutputConfig* config) {
+    return new BuiltinImageWriter("bmp","bmp",parent, config);
 }
-static AbstractImageWriter* PNG_img_writer(QObject* parent) {
-    return new BuiltinImageWriter("png","PNG",parent);
+static AbstractImageWriter* PNG_img_writer(QObject* parent, const OutputConfig* config) {
+    return new BuiltinImageWriter("png","PNG",parent, config);
 }
-static AbstractImageWriter* png_img_writer(QObject* parent) {
-    return new BuiltinImageWriter("png","png",parent);
+static AbstractImageWriter* png_img_writer(QObject* parent, const OutputConfig* config) {
+    return new BuiltinImageWriter("png","png",parent, config);
 }
 
-static AbstractImageWriter* TGA_img_writer(QObject* parent) {
-    return new TargaImageWriter("TGA",parent);
+static AbstractImageWriter* TGA_img_writer(QObject* parent, const OutputConfig* config) {
+    return new TargaImageWriter("TGA",parent, config);
 }
-static AbstractImageWriter* tga_img_writer(QObject* parent) {
-    return new TargaImageWriter("tga",parent);
+static AbstractImageWriter* tga_img_writer(QObject* parent, const OutputConfig* config) {
+    return new TargaImageWriter("tga",parent, config);
 }
 
 //static AbstractImageWriter* Maxim_img_writer(QObject* parent) {
 //    return new MaximImageWriter("bmp",parent);
 //}
 
-ImageWriterFactory::ImageWriterFactory(QObject *parent) :
-    QObject(parent)
+ImageWriterFactory::ImageWriterFactory(QObject *parent, const OutputConfig* config) :
+    QObject(parent), m_config(config)
 {
     m_factorys["png"] = &png_img_writer;
     m_factorys["PNG"] = &PNG_img_writer;
@@ -72,7 +72,7 @@ QStringList ImageWriterFactory::names() const {
 
 AbstractImageWriter* ImageWriterFactory::build(const QString &name,QObject* parent) {
     if (m_factorys.contains(name)) {
-        return m_factorys[name](parent);
+        return m_factorys[name](parent, m_config);
     }
     return 0;
 }

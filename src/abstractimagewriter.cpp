@@ -39,7 +39,7 @@
 #include <QPaintEngine>
 
 
-AbstractImageWriter::AbstractImageWriter(QObject *parent ) : QObject(parent),m_watcher(0) {
+AbstractImageWriter::AbstractImageWriter(QObject *parent, const OutputConfig* config) : QObject(parent),m_watcher(0), m_config(config) {
     setExtension("img");
     setReloadSupport(false);
     m_reload_timer = 0;
@@ -64,17 +64,15 @@ static void placeImage(QImage& dst,int x,int y,const QImage& src) {
     }
 }
 
-QImage AbstractImageWriter::buildImage() {
+QImage AbstractImageWriter::buildImage(QRgb bg_color) {
     QImage pixmap(layout()->width(),layout()->height(),QImage::Format_ARGB32);
 
-    uint32_t bg_color = 0xff000000;
     pixmap.fill(bg_color);
-
 
     QPainter painter(&pixmap);
 
     painter.setBackgroundMode(Qt::TransparentMode);
-    painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
+    painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
     foreach (const LayoutChar& c,layout()->placed())
         if (rendered()->chars.contains(c.symbol)) {
             const RenderedChar& rend = rendered()->chars[c.symbol];

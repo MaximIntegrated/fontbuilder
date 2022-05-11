@@ -39,7 +39,7 @@
 #include <QVector>
 #include <QImage>
 #include "rendererdata.h"
-
+#include "outputconfig.h"
 class LayoutData;
 class LayoutConfig;
 
@@ -50,7 +50,7 @@ class AbstractImageWriter : public QObject
 {
 Q_OBJECT
 public:
-    explicit AbstractImageWriter(QObject *parent );
+    explicit AbstractImageWriter(QObject *parent, const OutputConfig* config );
 
     const QString& errorString() const { return m_error_string;}
     const QString& extension() const { return m_extension;}
@@ -77,6 +77,9 @@ private:
     QTimer* m_reload_timer;
     QString m_reload_file;
 protected:
+    const OutputConfig* m_config;
+
+protected:
     void setExtension(const QString& extension) { m_extension = extension;}
     void setReloadSupport(bool support) { m_reload_support = support;}
     void setErrorMessage(const QString& str) { m_error_string=str; }
@@ -87,7 +90,7 @@ protected:
     const LayoutConfig* layoutConfig() const { return m_layout_config;}
     virtual bool Export(QFile& file) = 0;
     virtual QImage* reload( QFile& file) { Q_UNUSED(file);return 0;}
-    QImage buildImage();
+    QImage buildImage(QRgb bg_color);
 protected slots:
     void onFileChanged(const QString& fn);
     void onReload();

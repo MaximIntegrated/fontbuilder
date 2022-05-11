@@ -71,6 +71,15 @@ public:
     bool generateX2() const { return m_generate_x2;}
     void setGenerateX2(bool write) { m_generate_x2 = write;}
     Q_PROPERTY(bool generateX2 READ generateX2 WRITE setGenerateX2 )
+
+    QColor bgColor() const { return m_bg_color;}
+    void setBgColor(QColor c);
+    Q_PROPERTY(QColor m_bg_color READ bgColor WRITE setBgColor )
+
+    QColor fgColor() const { return m_fg_color;}
+    void setFgColor(QColor c);
+    Q_PROPERTY(QColor m_fg_color READ fgColor WRITE setFgColor )
+
 private:
     QString m_path;
     bool    m_write_image;
@@ -80,11 +89,13 @@ private:
     QString m_description_name;
     QString m_description_format;
     bool    m_generate_x2;
+    QColor m_bg_color;
+    QColor m_fg_color;
+
 signals:
     void imageNameChanged(const QString&);
     void descriptionNameChanged(const QString&);
-public slots:
-
+    void outputColorOptionsChanged();
 };
 
 #endif // OUTPUTCONFIG_H

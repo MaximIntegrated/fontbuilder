@@ -42,8 +42,8 @@
 
 #include <math.h>
 #include <iostream>
-FontRenderer::FontRenderer(QObject *parent,const FontConfig* config) :
-    QObject(parent), m_config(config)
+FontRenderer::FontRenderer(QObject *parent,const FontConfig* config, const OutputConfig* outputConfig) :
+    QObject(parent), m_config(config), m_outputConfig(outputConfig)
 {
     m_ft_library = 0;
     m_ft_face = 0;
@@ -53,6 +53,8 @@ FontRenderer::FontRenderer(QObject *parent,const FontConfig* config) :
     connect(config,SIGNAL(sizeChanged()),this,SLOT(on_fontSizeChanged()));
     connect(config,SIGNAL(charactersChanged()),this,SLOT(on_fontCharactersChanged()));
     connect(config,SIGNAL(renderingOptionsChanged()),this,SLOT(on_fontOptionsChanged()));
+    connect(outputConfig,SIGNAL(outputColorOptionsChanged()),this,SLOT(on_fontOptionsChanged()));
+
     int error =  FT_Init_FreeType(&m_ft_library);
     if (error) {
         qDebug() << "FT_Init_FreeType error " << error;
@@ -200,11 +202,14 @@ bool FontRenderer::append_bitmap(uint symbol) {
     int h = bm->rows;
     QImage img(w,h,QImage::Format_ARGB32);
 
-    uint32_t fg_color = 0xff000000;
-    img.fill(fg_color);
+    img.fill(0xff000000);
+
+    int r = m_outputConfig->fgColor().red();
+    int g = m_outputConfig->fgColor().green();
+    int b = m_outputConfig->fgColor().blue();
+
     const uchar* src = bm->buffer;
-    //QColor bg = m_config->bgColor();
-    //QColor fg = m_config->fgColor();
+
     if (bm->pixel_mode==FT_PIXEL_MODE_GRAY) {
 //        std::cout << "FT_PIXEL_MODE_GRAY" << std::endl;
         for (int row=0;row<h;row++) {
@@ -212,8 +217,7 @@ bool FontRenderer::append_bitmap(uint symbol) {
             for (int col=0;col<w;col++) {
                  {
                     uchar s = src[col];
-                    *dst = qRgba(0xFF, 0xFF, 0xFF,
-                            s);
+                    *dst = qRgba(r,g,b,s);
                 }
                 dst++;
             }
@@ -226,26 +230,26 @@ bool FontRenderer::append_bitmap(uint symbol) {
 
             for (int col=0;col<w/8;col++) {
                 uchar s = src[col];
-                *dst++ = qRgba(255,255,255,(s&(1<<7))?255:0);
-                *dst++ = qRgba(255,255,255,(s&(1<<6))?255:0);
-                *dst++ = qRgba(255,255,255,(s&(1<<5))?255:0);
-                *dst++ = qRgba(255,255,255,(s&(1<<4))?255:0);
-                *dst++ = qRgba(255,255,255,(s&(1<<3))?255:0);
-                *dst++ = qRgba(255,255,255,(s&(1<<2))?255:0);
-                *dst++ = qRgba(255,255,255,(s&(1<<1))?255:0);
-                *dst++ = qRgba(255,255,255,(s&(1<<0))?255:0);
+                *dst++ = qRgba(r,g,b,(s&(1<<7))?255:0);
+                *dst++ = qRgba(r,g,b,(s&(1<<6))?255:0);
+                *dst++ = qRgba(r,g,b,(s&(1<<5))?255:0);
+                *dst++ = qRgba(r,g,b,(s&(1<<4))?255:0);
+                *dst++ = qRgba(r,g,b,(s&(1<<3))?255:0);
+                *dst++ = qRgba(r,g,b,(s&(1<<2))?255:0);
+                *dst++ = qRgba(r,g,b,(s&(1<<1))?255:0);
+                *dst++ = qRgba(r,g,b,(s&(1<<0))?255:0);
             }
             {
                 uchar s = src[w/8];
                 int num = 7;
                 switch (w%8) {
-                case 7:  *dst++ = qRgba(255,255,255,(s&(1<<(num--)))?255:0);
-                case 6:  *dst++ = qRgba(255,255,255,(s&(1<<(num--)))?255:0);
-                case 5:  *dst++ = qRgba(255,255,255,(s&(1<<(num--)))?255:0);
-                case 4:  *dst++ = qRgba(255,255,255,(s&(1<<(num--)))?255:0);
-                case 3:  *dst++ = qRgba(255,255,255,(s&(1<<(num--)))?255:0);
-                case 2:  *dst++ = qRgba(255,255,255,(s&(1<<(num--)))?255:0);
-                case 1:  *dst++ = qRgba(255,255,255,(s&(1<<(num--)))?255:0);
+                case 7:  *dst++ = qRgba(r,g,b,(s&(1<<(num--)))?255:0);
+                case 6:  *dst++ = qRgba(r,g,b,(s&(1<<(num--)))?255:0);
+                case 5:  *dst++ = qRgba(r,g,b,(s&(1<<(num--)))?255:0);
+                case 4:  *dst++ = qRgba(r,g,b,(s&(1<<(num--)))?255:0);
+                case 3:  *dst++ = qRgba(r,g,b,(s&(1<<(num--)))?255:0);
+                case 2:  *dst++ = qRgba(r,g,b,(s&(1<<(num--)))?255:0);
+                case 1:  *dst++ = qRgba(r,g,b,(s&(1<<(num--)))?255:0);
                 case 0:
                     break;
                 }

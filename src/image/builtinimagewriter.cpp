@@ -35,8 +35,8 @@
 #include "../layoutconfig.h"
 #include <iostream>
 
-BuiltinImageWriter::BuiltinImageWriter(QString format,QString ext,QObject *parent) :
-    AbstractImageWriter(parent)
+BuiltinImageWriter::BuiltinImageWriter(QString format,QString ext,QObject *parent, const OutputConfig* config) :
+    AbstractImageWriter(parent, config)
 {
     setExtension(ext);
     setReloadSupport(true);
@@ -45,13 +45,23 @@ BuiltinImageWriter::BuiltinImageWriter(QString format,QString ext,QObject *paren
 
 
 bool BuiltinImageWriter::Export(QFile& file) {
-    QImage pixmap = buildImage();
 
+    QImage pixmap = buildImage(m_config->bgColor().rgba());
+
+    // TODO : use both fg and bg color
     if(m_format == "bmp" || m_format == "BMP") {
 
         QVector<QRgb> colorTable;
-        for(int i = 0; i < 255; i++) {
-            colorTable.append(0xff << 24 | i << 16 | i << 8 | i); // Color table should use FG and BG color info
+        int32_t rDiff = m_config->fgColor().red() - m_config->bgColor().red();
+        int32_t gDiff = m_config->fgColor().green() - m_config->bgColor().green();
+        int32_t bDiff = m_config->fgColor().blue() - m_config->bgColor().blue();
+
+        for(int i = 0; i < 256; i++) {
+            colorTable.append(0xff << 24
+                              | ((m_config->bgColor().red() + (rDiff*i)/255) & 0xFF) << 16
+                              | ((m_config->bgColor().green() + (gDiff*i)/255) & 0xFF) << 8
+                              | ((m_config->bgColor().blue() + (bDiff*i)/255) & 0xFF));
+            //std::cout << colorTable.takeLast() << std::endl;
         }
 
         QImage bitmap = pixmap.convertToFormat(QImage::Format_Indexed8, colorTable);

@@ -33,12 +33,13 @@
 #define BUILTINIMAGEWRITER_H
 
 #include "../abstractimagewriter.h"
+#include "../outputconfig.h"
 
 class BuiltinImageWriter : public AbstractImageWriter
 {
 Q_OBJECT
 public:
-    BuiltinImageWriter(QString format,QString ext,QObject *parent = 0);
+    BuiltinImageWriter(QString format,QString ext,QObject *parent, const OutputConfig* config);
 
     virtual bool Export(QFile& file);
     virtual QImage* reload(QFile& file);

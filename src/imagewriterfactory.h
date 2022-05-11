@@ -35,19 +35,21 @@
 #include <QMap>
 #include <QStringList>
 #include "abstractimagewriter.h"
+#include "outputconfig.h"
 
-typedef AbstractImageWriter* (*ImageWriterFactoryFunc) (QObject*);
+typedef AbstractImageWriter* (*ImageWriterFactoryFunc) (QObject*, const OutputConfig*);
 
 
 class ImageWriterFactory : public QObject
 {
 Q_OBJECT
 public:
-    explicit ImageWriterFactory(QObject *parent = 0);
+    explicit ImageWriterFactory(QObject *parent, const OutputConfig* config);
     AbstractImageWriter* build(const QString& name,QObject *parent);
     QStringList names() const;
 private:
     QMap<QString,ImageWriterFactoryFunc> m_factorys;
+    const OutputConfig* m_config;
 signals:
 
 public slots:
