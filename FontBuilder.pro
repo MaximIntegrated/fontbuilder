@@ -160,10 +160,10 @@ isEmpty(FREETYPE2CONFIG) {
         INCLUDEPATH += /usr/local/include /usr/local/include/freetype2
     }
     win32 {
-        INCLUDEPATH += ../include
-        INCLUDEPATH += ../include/freetype2
-        LIBS += -L../lib \
-            -lfreetype
+        INCLUDEPATH += ../fontbuilder/include
+        INCLUDEPATH += ../fontbuilder/include/freetype2
+        LIBS += -L../fontbuilder/lib \
+            -lfreetype6
     }
     linux*|freebsd* {
         CONFIG += link_pkgconfig
