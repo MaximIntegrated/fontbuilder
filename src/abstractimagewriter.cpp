@@ -67,29 +67,28 @@ static void placeImage(QImage& dst,int x,int y,const QImage& src) {
 QImage AbstractImageWriter::buildImage() {
     QImage pixmap(layout()->width(),layout()->height(),QImage::Format_ARGB32);
 
-    pixmap.fill(0x00ffffff);
+    uint32_t bg_color = 0xff000000;
+    pixmap.fill(bg_color);
 
 
-    /*
-    /// hm.. Qt bug ?
     QPainter painter(&pixmap);
 
     painter.setBackgroundMode(Qt::TransparentMode);
-    painter.setCompositionMode(QPainter::CompositionMode_Source);
+    painter.setCompositionMode(QPainter::CompositionMode_SourceAtop);
     foreach (const LayoutChar& c,layout()->placed())
         if (rendered()->chars.contains(c.symbol)) {
             const RenderedChar& rend = rendered()->chars[c.symbol];
             painter.drawImage(c.x + layoutConfig()->offsetLeft(),
                               c.y + layoutConfig()->offsetTop(),rend.img);
         }
-    */
-    foreach (const LayoutChar& c,layout()->placed())
-            if (rendered()->chars.contains(c.symbol)) {
-                const RenderedChar& rend = rendered()->chars[c.symbol];
-                int x = c.x + layoutConfig()->offsetLeft();
-                int y = c.y + layoutConfig()->offsetTop();
-                placeImage(pixmap,x,y,rend.img);
-            }
+
+//    foreach (const LayoutChar& c,layout()->placed())
+//            if (rendered()->chars.contains(c.symbol)) {
+//                const RenderedChar& rend = rendered()->chars[c.symbol];
+//                int x = c.x + layoutConfig()->offsetLeft();
+//                int y = c.y + layoutConfig()->offsetTop();
+//                placeImage(pixmap,x,y,rend.img);
+//            }
     return pixmap;
 }
 

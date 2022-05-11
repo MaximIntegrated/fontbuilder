@@ -41,7 +41,7 @@
 #include <QColor>
 
 #include <math.h>
-
+#include <iostream>
 FontRenderer::FontRenderer(QObject *parent,const FontConfig* config) :
     QObject(parent), m_config(config)
 {
@@ -199,17 +199,20 @@ bool FontRenderer::append_bitmap(uint symbol) {
     int w = bm->width;
     int h = bm->rows;
     QImage img(w,h,QImage::Format_ARGB32);
-    img.fill(0x00ffffff);
+
+    uint32_t fg_color = 0xff000000;
+    img.fill(fg_color);
     const uchar* src = bm->buffer;
     //QColor bg = m_config->bgColor();
     //QColor fg = m_config->fgColor();
     if (bm->pixel_mode==FT_PIXEL_MODE_GRAY) {
+//        std::cout << "FT_PIXEL_MODE_GRAY" << std::endl;
         for (int row=0;row<h;row++) {
             QRgb* dst = reinterpret_cast<QRgb*>(img.scanLine(row));
             for (int col=0;col<w;col++) {
                  {
                     uchar s = src[col];
-                    *dst = qRgba(0xff,0xff,0xff,
+                    *dst = qRgba(0xFF, 0xFF, 0xFF,
                             s);
                 }
                 dst++;
@@ -217,6 +220,7 @@ bool FontRenderer::append_bitmap(uint symbol) {
             src+=bm->pitch;
         }
     }else if (bm->pixel_mode==FT_PIXEL_MODE_MONO) {
+//        std::cout << "FT_PIXEL_MODE_MONO" << std::endl;
         for (int row=0;row<h;row++) {
             QRgb* dst = reinterpret_cast<QRgb*>(img.scanLine(row));
 

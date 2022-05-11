@@ -48,7 +48,13 @@ bool BuiltinImageWriter::Export(QFile& file) {
     QImage pixmap = buildImage();
 
     if(m_format == "bmp" || m_format == "BMP") {
-        QImage bitmap = pixmap.convertToFormat(QImage::Format_Indexed8);
+
+        QVector<QRgb> colorTable;
+        for(int i = 0; i < 255; i++) {
+            colorTable.append(0xff << 24 | i << 16 | i << 8 | i); // Color table should use FG and BG color info
+        }
+
+        QImage bitmap = pixmap.convertToFormat(QImage::Format_Indexed8, colorTable);
         bitmap.save(&file, "bmp");
         std::cout << "save bmp file" << std::endl;
     }
