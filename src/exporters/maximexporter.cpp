@@ -42,10 +42,14 @@ MaximExporter::MaximExporter(QObject *parent) :
 
 bool MaximExporter::Export(QByteArray& out) {
     const QVector<Symbol>& characters = symbols();
-    int size = characters.length();
-    out.append((char*)&size, 2);
+
+    out.append(1, 0x06);
+    int size = characters.length() - 1; // Space character is not supported on embedded platform
+    out.append((char*)&size, 1);
     out.append(4, 0x00);
     foreach(const Symbol& c, characters) {
+        if(c.id == 32) { continue; } // Space character is not supported on embedded platform
+
         out.append((char*)&c.placeX, 2);
         out.append((char*)&c.placeW, 1);
     }

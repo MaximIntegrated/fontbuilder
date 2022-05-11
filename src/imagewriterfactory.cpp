@@ -34,7 +34,7 @@
 //#include "image/maximimagewriter.h"
 
 static AbstractImageWriter* BMP_img_writer(QObject* parent) {
-    return new BuiltinImageWriter("bmp","BMP",parent);
+    return new BuiltinImageWriter("bmp","bmp",parent);
 }
 static AbstractImageWriter* PNG_img_writer(QObject* parent) {
     return new BuiltinImageWriter("png","PNG",parent);
