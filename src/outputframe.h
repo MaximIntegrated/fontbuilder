@@ -45,8 +45,6 @@ public:
     OutputFrame(QWidget *parent = 0);
     ~OutputFrame();
 
-    void setExporters(const QStringList& exporters);
-    void setImageWriters(const QStringList& writers);
     void setConfig(OutputConfig* config);
 
 protected:
@@ -57,15 +55,8 @@ private:
     OutputConfig*   m_config;
 
 private slots:
-    void on_comboBoxDescriptionType_currentIndexChanged(QString );
-    void on_checkBoxDrawGrid_toggled(bool checked);
-    void on_groupBoxDescription_toggled(bool );
-    void on_groupBoxImage_toggled(bool );
-    void on_comboBoxImageFormat_currentIndexChanged(QString );
     void onImageNameChanged(const QString& s);
-    void onDescriptionNameChanged(const QString& s);
     void on_lineEditImageFilename_editingFinished( );
-    void on_lineEditDescriptionFilename_editingFinished( );
     void on_pushButtonSelectPath_clicked();
 
     void on_checkBoxGenerateX2_stateChanged(int arg1);

@@ -48,7 +48,6 @@ OutputFrame::OutputFrame(QWidget *parent) :
         QString name = format;
         ui->comboBoxImageFormat->addItem(name,format);
     }*/
-    ui->widgetGridColor->setColor(QColor(255,0,255,255));
 }
 
 OutputFrame::~OutputFrame()
@@ -69,26 +68,18 @@ void OutputFrame::changeEvent(QEvent *e)
 }
 
 void OutputFrame::setConfig(OutputConfig* config) {
+    config->setWriteImage(true);
+    config->setImageFormat("BMP");
+    config->setWriteDescription(true);
+    config->setDescriptionFormat("Maxim Exporter");
+
     m_config = config;
     if (config) {
         ui->lineEditPath->setText(config->path());
         connect(config,SIGNAL(imageNameChanged(QString)),this,SLOT(onImageNameChanged(QString)));
         onImageNameChanged(config->imageName());
         connect(config,SIGNAL(descriptionNameChanged(QString)),this,SLOT(onDescriptionNameChanged(QString)));
-        onDescriptionNameChanged(config->descriptionName());
-        for (int i=0;i<ui->comboBoxImageFormat->count();i++)
-            if (ui->comboBoxImageFormat->itemText(i)==config->imageFormat())
-                ui->comboBoxImageFormat->setCurrentIndex(i);
-        ui->groupBoxImage->setChecked(config->writeImage());
-        if (ui->groupBoxDescription->isEnabled())
-            ui->groupBoxDescription->setChecked(config->writeDescription());
-        else
-            config->setWriteDescription(false);
 
-        for (int i=0;i<ui->comboBoxDescriptionType->count();i++)
-            if (ui->comboBoxDescriptionType->itemText(i)==config->descriptionFormat())
-                ui->comboBoxDescriptionType->setCurrentIndex(i);
-        config->setDescriptionFormat(ui->comboBoxDescriptionType->currentText());
         ui->checkBoxGenerateX2->setChecked(config->generateX2());
 
         ui->widgetBackgroundColor->setColor(config->bgColor());
@@ -114,58 +105,12 @@ void OutputFrame::onImageNameChanged(const QString& s) {
     ui->lineEditImageFilename->setText(s);
 }
 
-void OutputFrame::onDescriptionNameChanged(const QString& s) {
-    ui->lineEditDescriptionFilename->setText(s);
-}
-
 void OutputFrame::on_lineEditImageFilename_editingFinished()
 {
-    if (m_config) m_config->setImageName(ui->lineEditImageFilename->text());
-}
-
-void OutputFrame::on_lineEditDescriptionFilename_editingFinished()
-{
-    if (m_config) m_config->setDescriptionName(ui->lineEditDescriptionFilename->text());
-}
-
-void OutputFrame::on_comboBoxImageFormat_currentIndexChanged(QString name)
-{
-    if (m_config) m_config->setImageFormat(name);
-}
-
-void OutputFrame::on_groupBoxImage_toggled(bool checked)
-{
-    if (m_config) m_config->setWriteImage(checked);
-}
-
-void OutputFrame::on_groupBoxDescription_toggled(bool checked)
-{
-    if (m_config) m_config->setWriteDescription(checked);
-}
-
-void OutputFrame::on_checkBoxDrawGrid_toggled(bool checked)
-{
-    ui->widgetGridColor->setEnabled(checked);
-}
-
-void OutputFrame::setExporters(const QStringList& exporters) {
-    bool bs = ui->comboBoxDescriptionType->blockSignals(true);
-    ui->comboBoxDescriptionType->clear();
-    ui->comboBoxDescriptionType->addItems(exporters);
-    ui->comboBoxDescriptionType->blockSignals(bs);
-}
-
-void OutputFrame::setImageWriters(const QStringList& writers) {
-    bool bs = ui->comboBoxImageFormat->blockSignals(true);
-    ui->comboBoxImageFormat->clear();
-    ui->comboBoxImageFormat->addItems(writers);
-    ui->comboBoxImageFormat->blockSignals(bs);
-}
-
-
-void OutputFrame::on_comboBoxDescriptionType_currentIndexChanged(QString name)
-{
-    if (m_config) m_config->setDescriptionFormat(name);
+    if (m_config) {
+        m_config->setImageName(ui->lineEditImageFilename->text());
+        m_config->setDescriptionName(ui->lineEditImageFilename->text());
+    }
 }
 
 void OutputFrame::on_checkBoxGenerateX2_stateChanged(int arg1)

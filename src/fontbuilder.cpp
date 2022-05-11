@@ -92,10 +92,8 @@ FontBuilder::FontBuilder(QWidget *parent) :
     ui->frameLayoutConfig->setConfig(m_layout_config);
 
     m_exporter_factory = new ExporterFactory(this);
-    ui->frameOutput->setExporters(m_exporter_factory->names());
 
     m_image_writer_factory = new ImageWriterFactory(this, m_output_config);
-    ui->frameOutput->setImageWriters(m_image_writer_factory->names());
 
     this->setLayouterCurrentIndex("Line layout");
 
