@@ -73,7 +73,8 @@ SOURCES += src/main.cpp \
     src/layouters/gridlinelayouter.cpp \
     src/exporters/myguiexporter.cpp \
     src/exporters/bmfontexporter.cpp \
-    src/exporters/ageexporter.cpp 
+    src/exporters/ageexporter.cpp \
+    src/exporters/maximexporter.cpp
     
 
 HEADERS += src/fontbuilder.h \
@@ -118,8 +119,9 @@ HEADERS += src/fontbuilder.h \
     src/layouters/gridlinelayouter.h \
     src/exporters/myguiexporter.h \
     src/exporters/bmfontexporter.h \
-    src/exporters/ageexporter.h 
-    
+    src/exporters/ageexporter.h \
+    src/exporters/maximexporter.h
+
 
 FORMS += src/fontbuilder.ui \
     src/fontselectframe.ui \
