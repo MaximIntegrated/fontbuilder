@@ -114,10 +114,6 @@ FontBuilder::FontBuilder(QWidget *parent) :
     ui->frameOutput->setConfig(m_output_config);
     ui->frameFontSelect->setConfig(m_font_config);
 
-    ui->fontTestFrame->setLayoutData(m_layout_data);
-    ui->fontTestFrame->setRendererData(&m_font_renderer->data());
-    ui->fontTestFrame->setFontConfig(m_font_config);
-
     ui->widgetFontPreview->setLayoutData(m_layout_data);
     ui->widgetFontPreview->setRendererData(&m_font_renderer->data());
     ui->widgetFontPreview->setLayoutConfig(m_layout_config);
@@ -126,7 +122,6 @@ FontBuilder::FontBuilder(QWidget *parent) :
     m_font_config->emmitChange();
 
     connect(m_font_config,SIGNAL(spacingChanged()),this,SLOT(onSpacingChanged()));
-    ui->fontTestFrame->refresh();
 
     m_font_loader = new FontLoader(this);
 }
@@ -213,7 +208,6 @@ void FontBuilder::on_comboBoxLayouter_currentIndexChanged(QString name)
 }
 
 void FontBuilder::onRenderedChanged() {
-    ui->fontTestFrame->refresh();
     if (m_image_writer)
         m_image_writer->forget();
 }
@@ -242,7 +236,6 @@ void FontBuilder::onLayoutChanged() {
     qDebug() << "set layout image from rendered";
     m_layout_data->setImage(image);
     setLayoutImage(image);
-    ui->fontTestFrame->refresh();
     if (m_image_writer)
         m_image_writer->forget();
 }
@@ -370,13 +363,11 @@ void FontBuilder::onExternalImageChanged(const QString& fn) {
         setLayoutImage(*image);
         m_layout_data->setImage(*image);
         qDebug() << "set layout image from exernal";
-        ui->fontTestFrame->refresh();
         delete image;
     }
 }
 
 void FontBuilder::onSpacingChanged() {
-    ui->fontTestFrame->refresh();
 }
 
 void FontBuilder::on_comboBox_currentIndexChanged(int index)
