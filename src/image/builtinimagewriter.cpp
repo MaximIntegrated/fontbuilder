@@ -33,6 +33,7 @@
 #include "layoutdata.h"
 #include <QPainter>
 #include "../layoutconfig.h"
+#include <iostream>
 
 BuiltinImageWriter::BuiltinImageWriter(QString format,QString ext,QObject *parent) :
     AbstractImageWriter(parent)
@@ -45,7 +46,16 @@ BuiltinImageWriter::BuiltinImageWriter(QString format,QString ext,QObject *paren
 
 bool BuiltinImageWriter::Export(QFile& file) {
     QImage pixmap = buildImage();
-    pixmap.save(&file,m_format.toUtf8().data());
+    std::cout <<"format "<< m_format.toUtf8().data() << std::endl;
+
+    if(m_format == "bmp" || m_format == "BMP") {
+        QImage bitmap = pixmap.convertToFormat(QImage::Format_Indexed8);
+        bitmap.save(&file, "bmp");
+        std::cout << "save bmp file" << std::endl;
+    }
+    else {
+        pixmap.save(&file,m_format.toUtf8().data());
+    }
     return true;
 }
 

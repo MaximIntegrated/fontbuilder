@@ -31,7 +31,11 @@
 #include "imagewriterfactory.h"
 #include "image/builtinimagewriter.h"
 #include "image/targawriter.h"
+//#include "image/maximimagewriter.h"
 
+static AbstractImageWriter* BMP_img_writer(QObject* parent) {
+    return new BuiltinImageWriter("bmp","BMP",parent);
+}
 static AbstractImageWriter* PNG_img_writer(QObject* parent) {
     return new BuiltinImageWriter("png","PNG",parent);
 }
@@ -46,6 +50,10 @@ static AbstractImageWriter* tga_img_writer(QObject* parent) {
     return new TargaImageWriter("tga",parent);
 }
 
+//static AbstractImageWriter* Maxim_img_writer(QObject* parent) {
+//    return new MaximImageWriter("bmp",parent);
+//}
+
 ImageWriterFactory::ImageWriterFactory(QObject *parent) :
     QObject(parent)
 {
@@ -53,6 +61,9 @@ ImageWriterFactory::ImageWriterFactory(QObject *parent) :
     m_factorys["PNG"] = &PNG_img_writer;
     m_factorys["tga"] = &tga_img_writer;
     m_factorys["TGA"] = &TGA_img_writer;
+    m_factorys["BMP"] = &BMP_img_writer;
+//    m_factorys["Maxim"] = &Maxim_img_writer;
+
 }
 
 QStringList ImageWriterFactory::names() const {
