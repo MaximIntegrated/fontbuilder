@@ -35,6 +35,7 @@
 #include <QImage>
 #include <QPainter>
 #include "../layoutconfig.h"
+#include <iostream>
 
 #include <QDebug>
 
@@ -115,8 +116,7 @@ bool TargaImageWriter::Export(QFile& file) {
         /// @todo need endian control
         file.write((const char*)pixmap.scanLine(y),pixmap.width()*4);
     }
-
-
+    std::cout << "save tga file" << std::endl;
 
     return true;
 }

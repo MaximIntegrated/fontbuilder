@@ -46,7 +46,6 @@ BuiltinImageWriter::BuiltinImageWriter(QString format,QString ext,QObject *paren
 
 bool BuiltinImageWriter::Export(QFile& file) {
     QImage pixmap = buildImage();
-    std::cout <<"format "<< m_format.toUtf8().data() << std::endl;
 
     if(m_format == "bmp" || m_format == "BMP") {
         QImage bitmap = pixmap.convertToFormat(QImage::Format_Indexed8);
@@ -55,6 +54,7 @@ bool BuiltinImageWriter::Export(QFile& file) {
     }
     else {
         pixmap.save(&file,m_format.toUtf8().data());
+        std::cout << "save "<< m_format.toUtf8().data()<< " file" << std::endl;
     }
     return true;
 }
