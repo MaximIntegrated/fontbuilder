@@ -81,13 +81,13 @@ private:
 
     void doExport(bool x2);
     void setLayoutImage(const QImage& img);
+    void setLayouterCurrentIndex(QString name);
 public slots:
 
     void fontParametersChanged();
 
 private slots:
     void on_pushButtonWriteFont_clicked();
-    void on_comboBoxLayouter_currentIndexChanged(QString );
     void on_checkBoxDrawGrid_toggled(bool);
     void onLayoutChanged();
     void onRenderedChanged();
@@ -96,6 +96,7 @@ private slots:
     void onSpacingChanged();
     void on_comboBox_currentIndexChanged(int index);
     void on_action_Open_triggered();
+
 };
 
 #endif // FONTBUILDER_H

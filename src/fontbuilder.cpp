@@ -77,10 +77,6 @@ FontBuilder::FontBuilder(QWidget *parent) :
     m_layouter = 0;
     m_layouter_factory = new LayouterFactory(this);
 
-    bool b = ui->comboBoxLayouter->blockSignals(true);
-    ui->comboBoxLayouter->clear();
-    ui->comboBoxLayouter->addItems(m_layouter_factory->names());
-
     QSettings settings;
     restoreGeometry(settings.value("geometry").toByteArray());
     readConfig(settings,"fontconfig",m_font_config);
@@ -93,13 +89,7 @@ FontBuilder::FontBuilder(QWidget *parent) :
 
     ui->frameCharacters->setConfig(m_font_config);
     ui->frameFontOptions->setConfig(m_font_config);
-    if (!m_layout_config->layouter().isEmpty()) {
-        for (int i=0;i<ui->comboBoxLayouter->count();i++)
-            if (ui->comboBoxLayouter->itemText(i)==m_layout_config->layouter())
-                ui->comboBoxLayouter->setCurrentIndex(i);
-    }
     ui->frameLayoutConfig->setConfig(m_layout_config);
-
 
     m_exporter_factory = new ExporterFactory(this);
     ui->frameOutput->setExporters(m_exporter_factory->names());
@@ -107,9 +97,7 @@ FontBuilder::FontBuilder(QWidget *parent) :
     m_image_writer_factory = new ImageWriterFactory(this, m_output_config);
     ui->frameOutput->setImageWriters(m_image_writer_factory->names());
 
-    ui->comboBoxLayouter->blockSignals(b);
-    this->on_comboBoxLayouter_currentIndexChanged(
-            ui->comboBoxLayouter->currentText());
+    this->setLayouterCurrentIndex("Line layout");
 
     ui->frameOutput->setConfig(m_output_config);
     ui->frameFontSelect->setConfig(m_font_config);
@@ -189,7 +177,7 @@ void FontBuilder::fontParametersChanged() {
     qDebug("font parameters changed");
 }
 
-void FontBuilder::on_comboBoxLayouter_currentIndexChanged(QString name)
+void FontBuilder::setLayouterCurrentIndex(QString name)
 {
     if (name.isEmpty()) return;
     if (m_layouter) {
