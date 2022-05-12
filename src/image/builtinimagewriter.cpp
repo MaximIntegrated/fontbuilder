@@ -52,15 +52,15 @@ bool BuiltinImageWriter::Export(QFile& file) {
     if(m_format == "bmp" || m_format == "BMP") {
 
         QVector<QRgb> colorTable;
-        int32_t rDiff = m_config->fgColor().red() - m_config->bgColor().red();
-        int32_t gDiff = m_config->fgColor().green() - m_config->bgColor().green();
-        int32_t bDiff = m_config->fgColor().blue() - m_config->bgColor().blue();
+        int32_t rDiff = m_config->bgColor().red() - m_config->fgColor().red();
+        int32_t gDiff = m_config->bgColor().green() - m_config->fgColor().green();
+        int32_t bDiff = m_config->bgColor().blue() - m_config->fgColor().blue();
 
         for(int i = 0; i < 256; i++) {
             colorTable.append(0xff << 24
-                              | ((m_config->bgColor().red() + (rDiff*i)/255) & 0xFF) << 16
-                              | ((m_config->bgColor().green() + (gDiff*i)/255) & 0xFF) << 8
-                              | ((m_config->bgColor().blue() + (bDiff*i)/255) & 0xFF));
+                              | ((m_config->fgColor().red() + (rDiff*i)/255) & 0xFF) << 16
+                              | ((m_config->fgColor().green() + (gDiff*i)/255) & 0xFF) << 8
+                              | ((m_config->fgColor().blue() + (bDiff*i)/255) & 0xFF));
             //std::cout << colorTable.takeLast() << std::endl;
         }
 
