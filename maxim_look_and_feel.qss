@@ -1,0 +1,241 @@
+QWidget
+{
+  font-family:              'Arial';
+  font-size:                11pt;
+  font-style:               normal;
+  font-weight:              normal;
+  background-color:         white;
+}
+
+/*********************************************************
+ * Check Box Styling                                     *
+ *********************************************************/
+QCheckBox
+{
+  spacing:                  5px;
+}
+
+QCheckBox::indicator
+{
+  width:                    17px;
+  height:                   17px;
+}
+
+QCheckBox::indicator:unchecked
+{
+  image:                    url('./ui/images/checkbox-unchecked.png');
+}
+
+QCheckBox::indicator:checked
+{
+  image:                    url('./ui/images/checkbox-active.png');
+}
+
+/*********************************************************
+ * Radio Button Styling                                  *
+ *********************************************************/
+QRadioButton
+{
+  spacing:                  5px;
+}
+
+QRadioButton::indicator
+{
+  width:                    17px;
+  height:                   17px;
+}
+
+QRadioButton::indicator:unchecked
+{
+  image:                    url('./ui/images/unchecked.png');
+}
+
+QRadioButton::indicator:checked
+{
+  image:                    url('./ui/images/radio-butten-active.png');
+}
+
+/*********************************************************
+ * Spin Box Styling                                      *
+ *********************************************************/
+QSpinBox
+{
+  padding-right:            18px;
+  border-image:             url('./ui/images/updownborder.png');
+  border-width:             1;
+}
+
+QSpinBox::up-button
+{
+  subcontrol-origin:        border;
+  subcontrol-position:      top right;
+  width:                    18px;
+  border-image:             url('./ui/images/updownup.png') 1;
+  border-width:             1 1 0 1;
+}
+
+QSpinBox::up-button:hover
+{
+  border-image:             url('./ui/images/updownuphover.png') 1;
+}
+
+QSpinBox::up-arrow
+{
+  image:                    url('./ui/images/updownplus.png');
+  width:                    6px;
+  height:                   6px;
+}
+
+QSpinBox::down-button
+{
+  subcontrol-origin:        border;
+  subcontrol-position:      bottom right;
+  width:                    18px;
+  border-image:             url('./ui/images/updowndown.png') 1;
+  border-width:             0 1 1 1;
+}
+
+QSpinBox::down-button:hover
+{
+  border-image:             url('./ui/images/updowndownhover.png') 1;
+}
+
+QSpinBox::down-arrow
+{
+  image:                    url('./ui/images/updownminus.png');
+  width:                    5px;
+  height:                   3px;
+}
+
+/*********************************************************
+ * Scroll Bar Styling                                    *
+ *********************************************************/
+QScrollBar:horizontal
+{
+  border:                   1px solid #C8C8C8;
+  border-radius:            6px;
+  margin:                   2px;
+  background-color:         #E0E0E0;
+  max-height:               12px;
+}
+
+QScrollBar:vertical
+{
+  border:                   1px solid #C8C8C8;
+  border-radius:            6px;
+  margin:                   2px;
+  background-color:         #E0E0E0;
+  max-width:                10px;
+}
+
+QScrollBar::handle:horizontal
+{
+  border:                   1px solid #B6B6B6;
+  border-radius:            6px;
+  background-color:         #f5f5f5;
+  margin:                   -2px;
+  min-width:                30px;
+}
+
+QScrollBar::handle:vertical
+{
+  border:                   1px solid #B6B6B6;
+  border-radius:            6px;
+  background-color:         #f5f5f5;
+  margin:                   -2px;
+  min-height:               30px;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal,
+QScrollBar::left-arrow:horizontal,
+QScrollBar::right-arrow:horizontal,
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal
+{
+  width: 0;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical,
+QScrollBar::left-arrow:vertical,
+QScrollBar::right-arrow:vertical,
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical
+{
+  height: 0;
+}
+
+/*********************************************************
+ * Button Styling                                        *
+ *********************************************************/
+QPushButton
+{
+  border:                   0px solid #6C6F70;
+  border-radius:            4px;
+  color:                    #000000;
+  background-color:         qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #F3F3F3, stop: 1 #C6C6C6);
+  padding-top:              0px;
+  padding-bottom:           1px;
+  padding-left:             0px;
+  padding-right:            1px;
+  focus:
+}
+
+QPushButton:hover
+{
+  background-color:         qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7ebf6, stop: 1 #cbd4eb);
+  color:                    #0067B9
+}
+
+QPushButton:pressed
+{
+  background-color:         qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #7392ca, stop: 1 #0067B9);
+  padding-top:              1px;
+  padding-bottom:           0px;
+  padding-left:             1px;
+  padding-right:            0px;
+  color:                    white
+}
+
+QPushButton
+{
+    background-color:       qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ffffff, stop: 1 #e0e1e7);
+    color:                  black
+}
+
+QMenu
+{ 
+  color:					#000000;
+}
+QMenu:hover
+{ 
+  color:					#000000;
+}
+
+/*
+QMenuBar
+{
+  border:                   0px solid #6C6F70;
+  border-radius:            4px;
+  color:                    #000000;
+  background-color:         qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #F3F3F3, stop: 1 #C6C6C6);
+  padding-top:              0px;
+  padding-bottom:           1px;
+  padding-left:             0px;
+  padding-right:            1px;
+  focus:
+}*/
+
+QProgressBar {
+border: 2px solid #e0e0e0;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #d0d0d0, stop: 1 #ebebeb);
+border-radius: 10px 10px 10px 10px;
+height: 18px;
+text-align: center;
+}
+
+QProgressBar::chunk {
+background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ccefed, stop: 1 #1eb7b3);
+border-radius: 8px;
+}

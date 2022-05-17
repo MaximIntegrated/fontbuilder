@@ -36,10 +36,17 @@
 #endif
 #include <QCoreApplication>
 #include "fontbuilder.h"
+#include <QFile>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    QFile styleSheetFile("../../fontbuilder/maxim_look_and_feel.qss");
+    styleSheetFile.open(QFile::ReadOnly);
+    QString styleSheet = QLatin1String(styleSheetFile.readAll());
+    a.setStyleSheet(styleSheet);
+
     QCoreApplication::setOrganizationName("AndryBlack");
     QCoreApplication::setOrganizationDomain("andryblack.com");
     QCoreApplication::setApplicationName("FontBuilder");
