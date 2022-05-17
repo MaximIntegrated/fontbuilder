@@ -23,12 +23,12 @@ QCheckBox::indicator
 
 QCheckBox::indicator:unchecked
 {
-  image:                    url('./ui/images/checkbox-unchecked.png');
+  image:                    url(':/resources/ui/images/checkbox-unchecked.png');
 }
 
 QCheckBox::indicator:checked
 {
-  image:                    url('./ui/images/checkbox-active.png');
+  image:                    url(':/resources/ui/images/checkbox-active.png');
 }
 
 /*********************************************************
@@ -47,12 +47,12 @@ QRadioButton::indicator
 
 QRadioButton::indicator:unchecked
 {
-  image:                    url('./ui/images/unchecked.png');
+  image:                    url(':/resources/ui/images/unchecked.png');
 }
 
 QRadioButton::indicator:checked
 {
-  image:                    url('./ui/images/radio-butten-active.png');
+  image:                    url(':/resources/ui/images/radio-butten-active.png');
 }
 
 /*********************************************************
@@ -61,7 +61,7 @@ QRadioButton::indicator:checked
 QSpinBox
 {
   padding-right:            18px;
-  border-image:             url('./ui/images/updownborder.png');
+  border-image:             url(':/resources/ui/images/updownborder.png');
   border-width:             1;
 }
 
@@ -70,18 +70,18 @@ QSpinBox::up-button
   subcontrol-origin:        border;
   subcontrol-position:      top right;
   width:                    18px;
-  border-image:             url('./ui/images/updownup.png') 1;
+  border-image:             url(':/resources/ui/images/updownup.png') 1;
   border-width:             1 1 0 1;
 }
 
 QSpinBox::up-button:hover
 {
-  border-image:             url('./ui/images/updownuphover.png') 1;
+  border-image:             url(':/resources/ui/images/updownuphover.png') 1;
 }
 
 QSpinBox::up-arrow
 {
-  image:                    url('./ui/images/updownplus.png');
+  image:                    url(':/resources/ui/images/updownplus.png');
   width:                    6px;
   height:                   6px;
 }
@@ -91,18 +91,18 @@ QSpinBox::down-button
   subcontrol-origin:        border;
   subcontrol-position:      bottom right;
   width:                    18px;
-  border-image:             url('./ui/images/updowndown.png') 1;
+  border-image:             url(':/resources/ui/images/updowndown.png') 1;
   border-width:             0 1 1 1;
 }
 
 QSpinBox::down-button:hover
 {
-  border-image:             url('./ui/images/updowndownhover.png') 1;
+  border-image:             url(':/resources/ui/images/updowndownhover.png') 1;
 }
 
 QSpinBox::down-arrow
 {
-  image:                    url('./ui/images/updownminus.png');
+  image:                    url(':/resources/ui/images/updownminus.png');
   width:                    5px;
   height:                   3px;
 }

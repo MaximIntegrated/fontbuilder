@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>ui/images/checkbox-active.png</file>
+        <file>ui/images/checkbox-inactive.png</file>
+        <file>ui/images/checkbox-unchecked.png</file>
+        <file>ui/images/favicon.ico</file>
+        <file>ui/images/radio-butten-active.png</file>
+        <file>ui/images/radio-butten-inactive.png</file>
+        <file>ui/images/splash-screen-banner-no-txt.bmp</file>
+        <file>ui/images/unchecked.png</file>
+        <file>ui/images/updownborder.png</file>
+        <file>ui/images/updowndown.png</file>
+        <file>ui/images/updowndownhover.png</file>
+        <file>ui/images/updownminus.png</file>
+        <file>ui/images/updownplus.png</file>
+        <file>ui/images/updownup.png</file>
+        <file>ui/images/updownuphover.png</file>
+        <file>ui/maxim_look_and_feel.qss</file>
+    </qresource>
+</RCC>

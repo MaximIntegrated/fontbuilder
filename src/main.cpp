@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QFile styleSheetFile("../../fontbuilder/maxim_look_and_feel.qss");
+    QFile styleSheetFile(":/resources/ui/maxim_look_and_feel.qss");
     styleSheetFile.open(QFile::ReadOnly);
     QString styleSheet = QLatin1String(styleSheetFile.readAll());
     a.setStyleSheet(styleSheet);
