@@ -37,6 +37,7 @@
 #include <QCoreApplication>
 #include "fontbuilder.h"
 #include <QFile>
+#include <QtGui>
 
 int main(int argc, char *argv[])
 {
@@ -52,5 +53,7 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("FontBuilder");
     FontBuilder w;
     w.show();
+    w.setWindowIcon(QIcon(":/resources/ui/images/favicon.ico"));
+
     return a.exec();
 }
