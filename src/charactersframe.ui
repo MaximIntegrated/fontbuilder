@@ -26,7 +26,16 @@
    <property name="sizeConstraint">
     <enum>QLayout::SetMinimumSize</enum>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -63,6 +72,9 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QComboBox" name="comboBox_TextEncoding"/>
    </item>
    <item>
     <widget class="QPlainTextEdit" name="plainTextEdit">

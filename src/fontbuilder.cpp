@@ -88,6 +88,7 @@ FontBuilder::FontBuilder(QWidget *parent) :
     connect(ui->checkBoxDrawGrid,SIGNAL(toggled(bool)),this,SLOT(on_checkBoxDrawGrid_toggled(bool)));
 
     ui->frameCharacters->setConfig(m_font_config);
+    ui->frameCharacters->setDefault();
     ui->frameFontOptions->setConfig(m_font_config);
     ui->frameLayoutConfig->setConfig(m_layout_config);
 

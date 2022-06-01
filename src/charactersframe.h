@@ -46,6 +46,7 @@ public:
     ~CharactersFrame();
 
     void setConfig(FontConfig* config);
+    void setDefault();
 protected:
     void changeEvent(QEvent *e);
     QString getCharacters() const;
@@ -63,6 +64,7 @@ private slots:
     void on_plainTextEdit_textChanged();
     void on_pushButtonExport_clicked();
     void on_pushButtonImport_clicked();
+    void on_comboBox_TextEncoding_currentTextChanged(const QString& text);
 };
 
 #endif // CHARACTERSFRAME_H
