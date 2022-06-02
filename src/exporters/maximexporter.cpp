@@ -39,8 +39,21 @@ MaximExporter::MaximExporter(QObject *parent) :
     setExtension("mff");
 }
 
+char MaximExporter::getSymboldAppendId(QTextCodec* codec, uint id) {
+    uint symbol_id[] = {id};
+    QString symbol_str = QString::fromUcs4(symbol_id, 1);
+    QByteArray result = codec->fromUnicode(symbol_str);
+
+    // !!!!!!!!!!!!!!!!!
+    // Assumption :: Since only 8 bit code-page is supported first byte of result will be taken!
+    char symbol_append_id = result.size() > 1 ? 0 : result[0];
+    return symbol_append_id;
+}
 
 bool MaximExporter::Export(QByteArray& out) {
+    QString codepage = fontConfig()->codepage();
+    QTextCodec* codec = QTextCodec::codecForName(codepage.toUtf8());
+
     const QVector<Symbol>& characters = symbols();
 
     out.append(1, 0x06);
@@ -52,6 +65,9 @@ bool MaximExporter::Export(QByteArray& out) {
 
         out.append((char*)&c.placeX, 2);
         out.append((char*)&c.placeW, 1);
+
+        char symbol_append_id = getSymboldAppendId(codec, c.id);
+        out.append(1, symbol_append_id);
     }
     return true;
 }

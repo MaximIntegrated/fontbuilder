@@ -227,6 +227,7 @@ void CharactersFrame::on_plainTextEdit_textChanged()
 void CharactersFrame::setConfig(FontConfig* config) {
     m_config = config;
     ui->plainTextEdit->setPlainText(config->characters());
+    ui->comboBox_TextEncoding->setCurrentText(m_config->codepage());
 }
 
 void CharactersFrame::setDefault()
@@ -295,4 +296,7 @@ void CharactersFrame::on_comboBox_TextEncoding_currentTextChanged(const QString&
     }
 
     ui->plainTextEdit->setPlainText(result);
+    if(m_config) {
+        m_config->setCodePage(text);
+    }
 }

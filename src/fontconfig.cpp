@@ -115,6 +115,12 @@ void FontConfig::setCharacters(const QString& characters) {
     }
 }
 
+void FontConfig::setCodePage(const QString& codepage) {
+    if (m_codepage!=codepage) {
+        m_codepage=codepage;
+    }
+}
+
 
 void FontConfig::setHinting(int h) {
     if (m_hinting!=h) {

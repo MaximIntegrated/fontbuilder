@@ -10,6 +10,10 @@ public:
     explicit MaximExporter(QObject *parent = 0);
 
     virtual bool Export(QByteArray& out);
+
+private:
+    char getSymboldAppendId(QTextCodec* codec, uint id);
+
 signals:
 
 public slots:
