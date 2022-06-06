@@ -181,3 +181,6 @@ OTHER_FILES += fontbuilder_ru.ts \
 
 RESOURCES += \
     resource.qrc
+
+RC_ICONS = ui/images/favicon.ico
+
