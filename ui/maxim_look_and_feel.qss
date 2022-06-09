@@ -256,6 +256,9 @@ QPushButton
     color:                  black
 }
 
+/*********************************************************
+ * Menu Styling                                        *
+ *********************************************************/
 QMenu
 { 
   color:					#000000;
@@ -279,12 +282,15 @@ QMenuBar
   focus:
 }*/
 
+/*********************************************************
+ * QProgressBar Styling                                        *
+ *********************************************************/
 QProgressBar {
-border: 2px solid #e0e0e0;
-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #d0d0d0, stop: 1 #ebebeb);
-border-radius: 10px 10px 10px 10px;
-height: 18px;
-text-align: center;
+	border: 2px solid #e0e0e0;
+	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #d0d0d0, stop: 1 #ebebeb);
+	border-radius: 10px 10px 10px 10px;
+	height: 18px;
+	text-align: center;
 }
 
 QProgressBar::chunk {
@@ -385,4 +391,64 @@ QTabBar::tab:right:selected {
 QTabBar::tab:left:last, QTabBar::tab:right:last,
 QTabBar::tab:left:only-one, QTabBar::tab:right:only-one {
     margin-bottom: 0;
+}
+
+/*********************************************************
+ * QPlainTextEdit Styling                                *
+ *********************************************************/
+QPlainTextEdit {
+    background-color:#FFFFFF;
+	color:#000000;
+    border: 1px solid lightgray;
+}
+
+QPlainTextEdit:focus {
+    background-color:#FFFFFF;
+	color:#000000;
+	border: 1px solid #0078D7;
+}
+
+/*********************************************************
+ * QScrollArea Styling                                    *
+ *********************************************************/
+QScrollArea {
+    background-color:#FFFFFF;
+	color:#000000;
+    border: 1px solid lightgray;
+}
+
+QScrollArea:focus {
+    background-color:#FFFFFF;
+	color:#000000;
+	border: 1px solid #0078D7;
+}
+
+/*********************************************************
+ * QListWidget Styling                                    *
+ *********************************************************/
+QListWidget {
+    background-color:#FFFFFF;
+	color:#000000;
+    border: 1px solid lightgray;
+}
+
+QListWidget:focus {
+    background-color:#FFFFFF;
+	color:#000000;
+	border: 1px solid #0078D7;
+}
+
+/*********************************************************
+ * QLineEdit Styling                                    *
+ *********************************************************/
+QLineEdit {
+    background-color:#FFFFFF;
+	color:#000000;
+    border: 1px solid #7A7A7A;
+}
+
+QLineEdit:focus {
+    background-color:#FFFFFF;
+	color:#000000;
+	border: 1px solid #7A7A7A;
 }
