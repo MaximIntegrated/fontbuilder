@@ -41,7 +41,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Output directory:</string>
+      <string>Output directory</string>
      </property>
      <property name="buddy">
       <cstring>lineEditPath</cstring>
@@ -70,7 +70,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>File name:</string>
+         <string>File name</string>
         </property>
         <property name="buddy">
          <cstring>lineEditImageFilename</cstring>

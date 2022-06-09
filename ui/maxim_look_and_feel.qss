@@ -108,6 +108,58 @@ QSpinBox::down-arrow
 }
 
 /*********************************************************
+ * Double Spin Box Styling                                      *
+ *********************************************************/
+QDoubleSpinBox
+{
+  padding-right:            18px;
+  border-image:             url(':/resources/ui/images/updownborder.png');
+  border-width:             1;
+}
+
+QDoubleSpinBox::up-button
+{
+  subcontrol-origin:        border;
+  subcontrol-position:      top right;
+  width:                    18px;
+  border-image:             url(':/resources/ui/images/updownup.png') 1;
+  border-width:             1 1 0 1;
+}
+
+QDoubleSpinBox::up-button:hover
+{
+  border-image:             url(':/resources/ui/images/updownuphover.png') 1;
+}
+
+QDoubleSpinBox::up-arrow
+{
+  image:                    url(':/resources/ui/images/updownplus.png');
+  width:                    6px;
+  height:                   6px;
+}
+
+QDoubleSpinBox::down-button
+{
+  subcontrol-origin:        border;
+  subcontrol-position:      bottom right;
+  width:                    18px;
+  border-image:             url(':/resources/ui/images/updowndown.png') 1;
+  border-width:             0 1 1 1;
+}
+
+QDoubleSpinBox::down-button:hover
+{
+  border-image:             url(':/resources/ui/images/updowndownhover.png') 1;
+}
+
+QDoubleSpinBox::down-arrow
+{
+  image:                    url(':/resources/ui/images/updownminus.png');
+  width:                    5px;
+  height:                   3px;
+}
+
+/*********************************************************
  * Scroll Bar Styling                                    *
  *********************************************************/
 QScrollBar:horizontal
@@ -175,10 +227,10 @@ QPushButton
   border-radius:            4px;
   color:                    #000000;
   background-color:         qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #F3F3F3, stop: 1 #C6C6C6);
-  padding-top:              0px;
-  padding-bottom:           1px;
-  padding-left:             0px;
-  padding-right:            1px;
+  padding-top:              5px;
+  padding-bottom:           5px;
+  padding-left:             5px;
+  padding-right:            5px;
   focus:
 }
 
@@ -191,10 +243,10 @@ QPushButton:hover
 QPushButton:pressed
 {
   background-color:         qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #7392ca, stop: 1 #0067B9);
-  padding-top:              1px;
-  padding-bottom:           0px;
-  padding-left:             1px;
-  padding-right:            0px;
+  padding-top:              5px;
+  padding-bottom:           5px;
+  padding-left:             5px;
+  padding-right:            5px;
   color:                    white
 }
 
@@ -238,4 +290,99 @@ text-align: center;
 QProgressBar::chunk {
 background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #ccefed, stop: 1 #1eb7b3);
 border-radius: 8px;
+}
+
+/*********************************************************
+ * QTabBar Styling                                        *
+ *********************************************************/
+QTabWidget::pane {
+    border: 1px solid lightgray;
+    background: white;
+}
+
+QTabWidget::tab-bar:top {
+    top: 1px;
+}
+
+QTabWidget::tab-bar:bottom {
+    bottom: 1px;
+}
+
+QTabWidget::tab-bar:left {
+    right: 1px;
+}
+
+QTabWidget::tab-bar:right {
+    left: 1px;
+}
+
+QTabBar::tab {
+	background: rgb(240, 240, 240); 
+    border: 1px solid lightgray;
+}
+
+QTabBar::tab:selected {
+    background: white;
+}
+
+QTabBar::tab:!selected {
+	background: rgb(240, 240, 240); 
+}
+
+QTabBar::tab:!selected:hover {
+	background-color:         #D8EAF9
+}
+
+QTabBar::tab:top:!selected {
+    margin-top: 3px;
+}
+
+QTabBar::tab:bottom:!selected {
+    margin-bottom: 3px;
+}
+
+QTabBar::tab:top, QTabBar::tab:bottom {
+    min-width: 8ex;
+    margin-right: -1px;
+    padding: 5px 10px 5px 10px;
+}
+
+QTabBar::tab:top:selected {
+    border-bottom-color: none;
+}
+
+QTabBar::tab:bottom:selected {
+    border-top-color: none;
+}
+
+QTabBar::tab:top:last, QTabBar::tab:bottom:last,
+QTabBar::tab:top:only-one, QTabBar::tab:bottom:only-one {
+    margin-right: 0;
+}
+
+QTabBar::tab:left:!selected {
+    margin-right: 3px;
+}
+
+QTabBar::tab:right:!selected {
+    margin-left: 3px;
+}
+
+QTabBar::tab:left, QTabBar::tab:right {
+    min-height: 8ex;
+    margin-bottom: -1px;
+    padding: 10px 5px 10px 5px;
+}
+
+QTabBar::tab:left:selected {
+    border-left-color: none;
+}
+
+QTabBar::tab:right:selected {
+    border-right-color: none;
+}
+
+QTabBar::tab:left:last, QTabBar::tab:right:last,
+QTabBar::tab:left:only-one, QTabBar::tab:right:only-one {
+    margin-bottom: 0;
 }

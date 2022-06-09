@@ -26,13 +26,22 @@
    <property name="sizeConstraint">
     <enum>QLayout::SetMinimumSize</enum>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>Fonts directory:</string>
+      <string>Fonts directory</string>
      </property>
      <property name="buddy">
       <cstring>lineEditFontsDir</cstring>
@@ -128,7 +137,7 @@
    <item>
     <widget class="QLabel" name="label_FileName">
      <property name="text">
-      <string>File:</string>
+      <string>File</string>
      </property>
     </widget>
    </item>
