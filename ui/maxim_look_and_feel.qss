@@ -405,7 +405,7 @@ QPlainTextEdit {
 QPlainTextEdit:focus {
     background-color:#FFFFFF;
 	color:#000000;
-	border: 1px solid #0078D7;
+	border: 1px solid #lightgray;
 }
 
 /*********************************************************
@@ -420,7 +420,7 @@ QScrollArea {
 QScrollArea:focus {
     background-color:#FFFFFF;
 	color:#000000;
-	border: 1px solid #0078D7;
+	border: 1px solid #lightgray;
 }
 
 /*********************************************************
@@ -435,7 +435,7 @@ QListWidget {
 QListWidget:focus {
     background-color:#FFFFFF;
 	color:#000000;
-	border: 1px solid #0078D7;
+	border: 1px solid #lightgray;
 }
 
 /*********************************************************
