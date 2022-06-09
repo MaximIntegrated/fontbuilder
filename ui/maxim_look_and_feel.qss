@@ -452,3 +452,30 @@ QLineEdit:focus {
 	color:#000000;
 	border: 1px solid #7A7A7A;
 }
+
+/*********************************************************
+ * QSlider Styling                                    *
+ *********************************************************/
+QSlider::groove:horizontal { 
+	background-color: #E7EAEA;
+	border: 1px solid #D6D6D6; 
+	height: 2px; 
+	border-radius: 4px;
+}
+
+QSlider::handle:horizontal { 
+	background-color: #007AD9; 
+	border: 2px solid #007AD9; 
+	width: 8px;
+	margin-top: -8px; 
+	margin-bottom: -8px; 
+}
+
+QSlider::Handle:Hover
+{   
+    background-color: #171717;
+	border: 2px solid #171717;
+	width: 8px;
+	margin-top: -8px; 
+	margin-bottom: -8px; 
+}
